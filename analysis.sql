@@ -1,5 +1,4 @@
-# Monthly Temperature Trends
-
+-- Monthly Temperature Trends
 SELECT TO_CHAR("Date", 'Month') AS Month_Name,
 AVG("Temperature") AS Avg_Temperature
 FROM "Climate Change"."Combined Data"
@@ -7,7 +6,6 @@ GROUP BY TO_CHAR("Date", 'Month'), EXTRACT(MONTH FROM "Date")
 ORDER BY EXTRACT(MONTH FROM "Date");
 
 -- Average temperature by country
-
 SELECT "Country",
 AVG("Temperature") AS Avg_Temperature
 FROM "Climate Change"."Combined Data"
@@ -50,6 +48,7 @@ WHERE "Extreme Weather Events" <> 'None'
 GROUP BY Temperature_Range, "Extreme Weather Events"
 ORDER BY Temperature_Range, Event_Count DESC;
 
+
 -- Which cities are experiencing extreme weather events this week and what are their
 economic and population impacts?
 
@@ -60,7 +59,6 @@ select
 count(*) as "Event Type",
 Round(avg("Temperature"), 1) as "Average Temperature",
 sum("Population Exposure") as "Total Population Exposure",
-
 sum("Economic Impact Estimate") as "Total Economic Impact",
 round(avg("Infrastructure Vulnerability Score"), 0) as "Average Vulnerability"
 from "Climate Change"."Combined Data"
@@ -68,6 +66,7 @@ where "Date" between '2025-03-03' and '2025-03-07'
 and "Extreme Weather Events" != 'None'
 group by "Country", "City", "Extreme Weather Events"
 order by "Total Economic Impact" desc;
+
 
 -- What are the top 5 cities with the highest air quality concerns and their associate risks?
 
@@ -85,7 +84,9 @@ having avg("Air Quality Index") > 100
 order by "Average AQI"
 limit 5;
 
-Which biome types are most risk from extreme weather events this week?
+
+-- Which biome types are most risk from extreme weather events this week?
+
 select
 "Biome Type",
 count(*) as "Total Records",
